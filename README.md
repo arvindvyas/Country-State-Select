@@ -1,6 +1,5 @@
 # CountryStateSelect
 
-TODO: Write a gem description
 
 ## Installation
 
@@ -16,9 +15,6 @@ Or install it yourself as:
 
     $ gem install country_state_select
 
-## Usage
-
-TODO: Write usage instructions here
 
 ## Contributing
 

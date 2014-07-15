@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = CountryStateSelect::VERSION
   spec.authors       = ["Arvind Vyas"]
   spec.email         = ["arvindvyas07@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{This is to list country and state.}
+  spec.description   = %q{Can list out country and according to that can list stae.}
   spec.homepage      = ""
   spec.license       = "MIT"
 

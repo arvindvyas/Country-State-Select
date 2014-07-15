@@ -35,4 +35,7 @@ module CountryStateSelect
     "Venezuela, Bolivarian Republic of", "Viet Nam", "Virgin Islands, British", "Virgin Islands, U.S.",
     "Wallis and Futuna", "Western Sahara", "Yemen", "Zambia", "Zimbabwe"] 
 
+  def self.countries
+  	COUNTRIES
+  end
 end

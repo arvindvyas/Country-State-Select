@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["arvindvyas07@gmail.com"]
   spec.summary       = %q{This is to list country and state.}
   spec.description   = %q{Can list out country and according to that can list stae.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/arvindvyas/country_state_select.git"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

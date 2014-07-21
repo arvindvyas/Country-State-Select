@@ -1,15 +1,16 @@
 require "country_state_select/version"
 
-require_file 'modules/constant'
+require 'country_state_select/constant'
 
 module CountryStateSelect
+  include CountryStateSelect::Constant
  
   def self.countries
     COUNTRIES
   end
 
   def self.india
-    INDIAN_STATES.concat(INDIAN_TERRIOTORY)
+    INDIAN_STATES.merge(INDIAN_TERRIOTORY)
   end
 
   def self.us_states
@@ -25,6 +26,6 @@ module CountryStateSelect
   end
 
   def self.all_states
-    INDIAN_STATES.concat(INDIAN_TERRIOTORY).concat(USA_STATE_LIST)concat(CANADIAN_STATES)concat(UK_STATES)
+    INDIAN_STATES.merge(INDIAN_TERRIOTORY).merge(USA_STATE_LIST).merge(CANADIAN_STATES).merge(UK_STATES)
   end
 end

@@ -41,7 +41,7 @@ module CountryStateSelect
       "Wallis and Futuna", "Western Sahara", "Yemen", "Zambia", "Zimbabwe"]
 
   #array containing all the Indian states except Indian Territory        
-  INDIAN_STATES = [
+  INDIAN_STATES = {
      'AP' => 'Andhra Pradesh',
      'AR' => 'Arunachal Pradesh',
      'AS' => 'Assam',
@@ -70,10 +70,10 @@ module CountryStateSelect
      'UK' => 'Uttarakhand',
      'UP' => 'Uttar Pradesh',
      'WB' => 'West Bengal',
-    ]
+    }
 
   #array containing all the Indian Territory 
-  INDIAN_TERRIOTORY  = [
+  INDIAN_TERRIOTORY  = {
      'AN' => 'Andaman & Nicobar',
      'CH' => 'Chandigarh',
      'DN' => 'Dadra and Nagar Haveli',
@@ -81,10 +81,10 @@ module CountryStateSelect
      'DL' => 'Delhi',
      'LD' => 'Lakshadweep',
      'PY' => 'Puducherry',
-    ]
+    }
 
   #array containing us states
-  USA_STATES = [
+  USA_STATES = {
     'AL'=>"Alabama", 
     'AK'=>"Alaska", 
     'AZ'=>"Arizona", 
@@ -136,10 +136,10 @@ module CountryStateSelect
     'WV'=>"West Virginia", 
     'WI'=>"Wisconsin", 
     'WY'=>"Wyoming"
-  ]
+  }
   
   #array containing Canadian states
-  CANADIAN_STATES = [ 
+  CANADIAN_STATES = { 
     "BC" => "British Columbia", 
     "ON" => "Ontario", 
     "NL" => "Newfoundland and Labrador", 
@@ -153,10 +153,10 @@ module CountryStateSelect
     "NT" => "Northwest Territories", 
     "NU" => "Nunavut",
     "YT" => "Yukon Territory"
-   ]
+   }
 
   #array containing all the uk states
-  UK_STATES = [
+  UK_STATES = {
     'GSY' => "Guernsey",
     'JSY' => "Jersey",
     'BDG' => "Barking and Dagenham",
@@ -511,7 +511,7 @@ module CountryStateSelect
     'WIL' => 'Wiltshire',
     'WOR' => 'Worcestershire',
     'WRX' => 'Wrexham'
-   ]
+   }
  
   end
 end

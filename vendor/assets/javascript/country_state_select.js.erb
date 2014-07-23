@@ -1,0 +1,40 @@
+
+
+$( document ).ready(function() {
+    arrayCountry = '<%= COUNTRIES %>'
+
+    $( "#country_id").change(function() {
+        var state = $('#country_id option:selected').text()
+        var indian_state = '<%= INDIAN_STATES %>'
+
+        var usa_state = <%= USA_STATES %>
+
+        var canadan_state = <%= CANADIAN_STATES %>
+
+        var uk_state = <%= UK_STATES %>
+
+        switch ( state ) {
+            case "India":
+                default_state = indian_state
+                break
+            case "United Kingdom":
+                default_state = uk_state
+                break;
+            case "Canada":
+                default_state = canadan_state
+                break;
+            case "United States":
+                default_state = usa_state
+                break;
+            default:
+                alert( "here required to add one input box" );
+        }
+        var s = $('');
+
+        for(var val in default_state) {
+            $('', {value: val, text: default_state[val]}).appendTo(s);
+        }
+
+        $('#second_select').html(s); // or wherever it should be
+    });
+});

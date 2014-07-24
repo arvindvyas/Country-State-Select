@@ -2,7 +2,7 @@ $(function() {
     arrayCountry = '<%= COUNTRIES %>'
 
     $( "#country_id").change(function() {
-        var state = $('#country_id option:selected').text()
+        var country = $('#country_id option:selected').text()
         var indian_state = '<%= INDIAN_STATES %>'
 
         var usa_state = <%= USA_STATES %>
@@ -11,7 +11,7 @@ $(function() {
 
         var uk_state = <%= UK_STATES %>
 
-        switch ( state ) {
+        switch (country) {
             case "India":
                 default_state = indian_state
                 break

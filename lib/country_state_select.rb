@@ -1,15 +1,16 @@
 require "country_state_select/version"
 
-require_file 'modules/constant'
+require 'country_state_select/constant'
 
 module CountryStateSelect
+  include CountryStateSelect::Constant
  
   def self.countries
     COUNTRIES
   end
 
   def self.india
-    INDIAN_STATES.concat(INDIAN_TERRIOTORY)
+    INDIAN_STATES.merge(INDIAN_TERRIOTORY)
   end
 
   def self.us_states
@@ -25,6 +26,21 @@ module CountryStateSelect
   end
 
   def self.all_states
-    INDIAN_STATES.concat(INDIAN_TERRIOTORY).concat(USA_STATE_LIST)concat(CANADIAN_STATES)concat(UK_STATES)
+    INDIAN_STATES.merge(INDIAN_TERRIOTORY).merge(USA_STATE_LIST).merge(CANADIAN_STATES).merge(UK_STATES)
   end
+
+  module Rails
+
+  end
+end
+
+case ::Rails.version.to_s
+  when /^4/
+    require 'country_state_select/engine'
+  when /^3\.[12]/
+    require 'country_state_select/engine3'
+  when /^3\.[0]/
+    require 'country_state_select/railtie'
+  else
+    raise 'Unsupported rails version'
 end

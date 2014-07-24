@@ -25,4 +25,4 @@ Or install it yourself as:
 5. Create a new Pull Request
 
 
-##Currently I m working on this, state will add soon on this also refector the code and need to add the test case 
+##Currently I am working on this, state will add soon on this also refactor the code and need to add the test case

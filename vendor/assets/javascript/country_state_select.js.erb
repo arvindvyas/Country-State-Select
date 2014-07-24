@@ -1,38 +1,41 @@
-$(function() {
-    arrayCountry = '<%= COUNTRIES %>'
+$(function () {
+    arrayCountry = <%= CountryStateSelect::Constant::COUNTRIES %>
 
-    $( "#country_id").change(function() {
-        var country = $('#country_id option:selected').text()
-        var indian_state = '<%= INDIAN_STATES %>'
+            $("#country_id").change(function () {
 
-        var usa_state = <%= USA_STATES %>
+                var default_state = []
+                var country = $('#country_id option:selected').text()
+                var indian_state =
+                <%= CountryStateSelect::Constant::INDIAN_STATES %>
+                var usa_state =
+                <%= CountryStateSelect::Constant::USA_STATES %>
+                var canadan_state =
+                <%= CountryStateSelect::Constant::CANADIAN_STATES %>
+                var uk_state =
+                <%= CountryStateSelect::Constant::UK_STATES %>
+                var options = '';
 
-        var canadan_state = <%= CANADIAN_STATES %>
+                switch (country) {
+                    case "India":
+                        default_state = indian_state
+                        break
+                    case "United Kingdom":
+                        default_state = uk_state
+                        break;
+                    case "Canada":
+                        default_state = canadan_state
+                        break;
+                    case "United States":
+                        default_state = usa_state
+                        break;
+                    default:
+                        alert("here required to add one input box");
+                }
 
-        var uk_state = <%= UK_STATES %>
+                $.each(default_state, function (val, item) {
+                    options = options + '<option value=' + item[1] + '>' + item[0] + '</option>';
+                });
 
-        switch (country) {
-            case "India":
-                default_state = indian_state
-                break
-            case "United Kingdom":
-                default_state = uk_state
-                break;
-            case "Canada":
-                default_state = canadan_state
-                break;
-            case "United States":
-                default_state = usa_state
-                break;
-            default:
-                alert( "here required to add one input box" );
-        }
-        var s = $('');
-
-        for(var val in default_state) {
-            $('', {value: val, text: default_state[val]}).appendTo(s);
-        }
-
-        $('#second_select').html(s); // or wherever it should be
-    });
+                $('#state_id').html(options); // or wherever it should be
+            });
 });

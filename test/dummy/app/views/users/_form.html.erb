@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :state_id %><br>
-    <%= f.number_field :state_id %>
+    <%= f.select :state_id, CountryStateSelect::Constant::COUNTRIES, {}, id: 'state_id' %>
   </div>
   <div class="actions">
     <%= f.submit %>

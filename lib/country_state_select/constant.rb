@@ -47,7 +47,7 @@ module CountryStateSelect
                      ["Kerala", "KL"], ["Madhya Pradesh", "MP"], ["Maharashtra", "MH"], ["Manipur", "MN"],
                      ["Meghalaya", "ML"], ["Mizoram", "MZ"], ["Nagaland", "NL"], ["Odisha", "OR"], ["Punjab", "PB"],
                      ["Rajasthan", "RJ"], ["Sikkim", "SK"], ["Tamil Nadu", "TN"], ["Tripura", "TR"], ["Uttarakhand", "UK"],
-                     ["Uttar Pradesh", "UP"], ["West Bengal", "WB"]].sort
+                     ["Uttar Pradesh", "UP"], ["West Bengal", "WB"], ["Telangana", "TS"]].sort
 
     #array containing all the Indian Territory
     INDIAN_TERRIOTORY = [["Andaman & Nicobar", "AN"], ["Chandigarh", "CH"], ["Dadra and Nagar Haveli", "DN"],

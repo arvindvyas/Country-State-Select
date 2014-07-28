@@ -6,6 +6,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Country</th>
+       <th>Country Name from second select</th>
       <th>State</th>
       <th></th>
       <th></th>
@@ -18,8 +19,9 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= user.country_id %></td>
-        <td><%= user.state_id %></td>
+        <td><%= CountryStateSelect::Constant::COUNTRIES[user.country_id] %></td>
+        <td><%= user.country_name%></td>
+        <td><%= user.state_name %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>

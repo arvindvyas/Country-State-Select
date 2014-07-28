@@ -21,11 +21,14 @@
   </div>
   <div class="field">
     <%= f.label :country_id %><br>
-    <%= f.select :country_id, CountryStateSelect::Constant::COUNTRIES, {}, id: 'country_id' %>
+    <%= f.select :country_name, CountryStateSelect::Constant::COUNTRIES, {}, id: 'country_id' %>
+    
+<!---I have not taken the country_id in below select due to not repeat the two same id-->
+    <%= f.select(:country_id, options_for_select(Array[*CountryStateSelect::Constant::COUNTRIES.collect {|v,i| [v,CountryStateSelect::Constant::COUNTRIES.index(v)] }], :selected => f.object)) %>
   </div>
-  <div class="field">
-    <%= f.label :state_id %><br>
-    <%= f.select :state_id, CountryStateSelect::Constant::COUNTRIES, {}, id: 'state_id' %>
+   <div class="field">
+    <%= f.label :state_name %><br>
+    <%= f.text_field :state_name ,:id=> 'state_name'%>
   </div>
   <div class="actions">
     <%= f.submit %>

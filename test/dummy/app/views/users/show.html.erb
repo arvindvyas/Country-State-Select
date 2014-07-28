@@ -12,12 +12,15 @@
 
 <p>
   <strong>Country:</strong>
-  <%= @user.country_id %>
+  <%= CountryStateSelect::Constant::COUNTRIES[@user.country_id] %>
 </p>
-
+<p>
+  <strong>Country Name From second drop down:</strong>
+  <%= @user.country_name %>
+</p>
 <p>
   <strong>State:</strong>
-  <%= @user.state_id %>
+  <%= @user.state_name %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

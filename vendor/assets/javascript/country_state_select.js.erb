@@ -1,8 +1,5 @@
 $(document).on('ready page:load', function () {
-  arrayCountry = <%= CountryStateSelect::Constant::COUNTRIES %>
-
   $("#country_id").change(function() {
-
     var default_state = []
     var country = $('#country_id option:selected').text()
     var name = $("#state_name").attr("name");
@@ -34,13 +31,13 @@ $(document).on('ready page:load', function () {
         default_state = []
     }
   
-  if (default_state.length > 0) {
-    for(var val in default_state) {
-      $('<option />', {value: default_state[val], text: default_state[val]}).appendTo(select);
+    if (default_state.length > 0) {
+      for(var val in default_state) {
+        $('<option />', {value: default_state[val], text: default_state[val]}).appendTo(select);
+      }
+    } else {
+      select = "<input id='state_name' name="+ name +" type='text' value='' />"
     }
-  } else {
-    select = "<input id='state_name' name="+ name +" type='text' value='' />"
-  }
-  $('#state_name').replaceWith(select); // it will replace what ever inside the id
+    $('#state_name').replaceWith(select); // it will replace what ever inside the id
   });
 });

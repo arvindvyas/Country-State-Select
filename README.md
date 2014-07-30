@@ -20,23 +20,23 @@ Or install it yourself as:
 
 It will create for you a select option, just care about 'id' if you want to update your state field 
 
-<%= f.select :country_name, CountryStateSelect::Constant::COUNTRIES, {}, id: 'country_id' %>
+    <%= f.select :country_name, CountryStateSelect::Constant::COUNTRIES, {}, id: 'country_id' %>
 
-##You can create your state like below mention also you have to put the id name same as it is mention here 
+Create your state like mention below, and take care about id of the select field if you will change this then it will now work as it should be 
 
-<%= f.text_field :state_name ,:id=> 'state_name'%>
+    <%= f.text_field :state_name ,:id=> 'state_name'%>
 
 If you want to store country id then use this select option it will store the country id inside the database if you want the state field update with this then you can put id field inside this also like we have mention in previous example  
 
-<%= f.select(:country_id, options_for_select(Array[*CountryStateSelect::Constant::COUNTRIES.collect {|v,i| [v,
-CountryStateSelect::Constant::COUNTRIES.index(v)] }], :selected => f.object)) %>
+    <%= f.select(:country_id, options_for_select(Array[*CountryStateSelect::Constant::COUNTRIES.collect {|v,i| [v,
+    CountryStateSelect::Constant::COUNTRIES.index(v)] }], :selected => f.object)) %>
 
-##If you want to fetch the country name By 'id' then you have to just write 
+#If you want to fetch the country name By 'id' then you have to just write 
 
-<%= CountryStateSelect::Constant::COUNTRIES['PASS THE COUNTRY ID WHICH YOU SAVE HERE'] %>
+    <%= CountryStateSelect::Constant::COUNTRIES['PASS THE COUNTRY ID WHICH YOU SAVE HERE'] %>
 
 
-##NOTE :- It will update the state field when there will be India,United Kingdom,Canada and United States so except there country if you select other country then you have to manually enter the state name, we are working on this soon we will cover most of the country 
+#NOTE :- It will update the state field when there will be India,United Kingdom,Canada and United States so except there country if you select other country then you have to manually enter the state name, we are working on this soon we will cover most of the country 
 
 
 ## Contributing

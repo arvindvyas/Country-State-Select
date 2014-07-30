@@ -18,6 +18,9 @@ Or install it yourself as:
 
 ##Very easy to create select box just follow below steps
 
+First put this to the application.js file to load the js file
+    //= require country_state_select
+
 It will create for you a select option, just care about 'id' if you want to update your state field 
 
     <%= f.select :country_name, CountryStateSelect::Constant::COUNTRIES, {}, id: 'country_id' %>

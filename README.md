@@ -40,7 +40,7 @@ If you want to fetch the country name By 'id' then you have to just write
     <%= CountryStateSelect::Constant::COUNTRIES['PASS THE COUNTRY ID WHICH YOU SAVE HERE'] %>
 
 
-NOTE :- It will update the state field when there will be India,United Kingdom,Canada and United States so except there country if you select other country then you have to manually enter the state name, we are working on this soon we will cover most of the country 
+NOTE :- It will update the state field when there will be India,United Kingdom,Canada and United States so except these country if you select other country then you have to manually enter the state name, we are working on this soon we will cover most of the country 
 
 
 ## Contributing

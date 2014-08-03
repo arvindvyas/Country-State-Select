@@ -92,8 +92,10 @@ In both the version state field will not update if you will select the country
 	Create one coffee-script file eg scaffold.js.coffee
 		$(document).on 'ready page:load', ->
 		  $('.chosen-select').change ->
-		    $("#state_name" ).chosen() //this will add the chosen-select in to the state select
-		  
+		    if $('#state_name option').size() > 1
+		      $("#state_name" ).chosen() //this will add the chosen-select in to the state select
+		    $("#state_name_chosen").empty();
+		      
 		  $('.chosen-select').chosen
 		    allow_single_deselect: true
 		    no_results_text: 'No results matched'

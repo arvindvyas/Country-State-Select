@@ -3,7 +3,7 @@ $(document).on('ready page:load', function () {
     var default_state = []
     var country = $('#country_id option:selected').text()
     var name = $("#state_name").attr("name");
-    var select = $('<select name='+ name +' id="stae_name"></select>');
+    var select = $('<select name='+ name +' id="state_name"></select>');
     var indian_state =
     <%= CountryStateSelect::Constant::INDIAN_STATES %>
     var usa_state =

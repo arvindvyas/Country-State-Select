@@ -19,7 +19,7 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= CountryStateSelect::Constant::COUNTRIES[user.country_id] %></td>
+        <td><%#= CountryStateSelect::Constant::COUNTRIES[user.country_id] %></td>
         <td><%= user.country_name%></td>
         <td><%= user.state_name %></td>
         <td><%= link_to 'Show', user %></td>

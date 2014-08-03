@@ -1,19 +1,52 @@
-# CountryStateSelect
+= Country State Select
 
+Country State Select is library which gives you all the country names and when you select any country then it also create the other select box with all the states name of that country
 
-## Installation
+== Getting Started
 
-Add this line to your application's Gemfile:
+Country State Select is released as a Ruby Gem. The gem is to be installed within a Ruby
+or Rails application. To install, simply add the following to your Gemfile:
 
-    gem 'country_state_select'
+  gem 'country_state_select'
+  
+Run bundle install and don't forget to restart your server after you install a new gem.
+  
+== Usage
+             
+ It returns all the country name
+  
+ CountryStateSelect::Constant::COUNTRIES
+  
+ => ["Afghanistan", "Aland Islands", "Albania", "Algeria", "American Samoa", "Andorra", "Angola",
+                 "Anguilla", "Antarctica", "Antigua And Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria",
+         ................................]        
+  
+ It returns all the Indian states. 
+    
+ CountryStateSelect::Constant::INDIAN_STATES
 
-And then execute:
+ It return all the USA states.
+ 
+ CountryStateSelect::Constant::USA_STATES
+       
+ It returns all the Canadian states.
+   
+ CountryStateSelect::CANADIAN_STATES
+    
+ It returns all the UK states.
+  
+ CountryStateSelect::UK_STATES
 
-    $ bundle
+== Version History
 
-Or install it yourself as:
+1.0.0
+  
+It is the stable version which have all the feature
+It also have support of chosen-rails
 
-    $ gem install country_state_select
+0.0.3 & 0.0.4 
+
+In both the version state field will not update if you will select the country
 
 
 ##Very easy to create select box just follow below steps
@@ -41,12 +74,45 @@ If you want to fetch the country name By 'id' then you have to just write
 
 
 NOTE :- It will update the state field when there will be India,United Kingdom,Canada and United States so except these country if you select other country then you have to manually enter the state name, we are working on this soon we will cover most of the country 
+  
+== Configure if want country_state_select with chosen_rails 
 
+Include both the gem in your Gemfile
+    gem 'chosen-rails'
+    gem 'country_state_select'
+  
+Include 'chosen-jquery' inside your application.js file
+    //= require chosen-jquery
 
-## Contributing
+Include chosen inside stylesheet assets
+    *= require chosen
 
-1. Fork it ( https://github.com/[my-github-username]/country_state_select/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+Enable chosen javascript 
+
+Create one coffee-script file eg scaffold.js.coffee
+	$(document).on 'ready page:load', ->
+	  $('.chosen-select').change ->
+	    $("#state_name" ).chosen() //this will add the chosen-select in to the state select
+	  
+	  $('.chosen-select').chosen
+	    allow_single_deselect: true
+	    no_results_text: 'No results matched'
+	    width: '280px'
+
+And this file must be included in application.js
+  //= require chosen-jquery
+  //= require scaffold
+ above scaffold is required because we have put the js inside that if you put in other coffee file that that you have to include
+
+And the country select option will be 
+  <%= f.select :country_name, CountryStateSelect::Constant::COUNTRIES, {}, id: 'country_id', :class=>'chosen-select' %>
+And the state input box will be 
+  <%= f.text_field :state_name ,:id=>'state_name' %>
+
+== Contributing to Country State Select
+
+  Fork, fix, then send me a pull request.
+  
+== License
+
+:include:license

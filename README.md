@@ -75,7 +75,7 @@ If you want to fetch the country name By 'id' then you have to just write
 
 NOTE :- It will update the state field when there will be India,United Kingdom,Canada and United States so except these country if you select other country then you have to manually enter the state name, we are working on this soon we will cover most of the country 
   
-== Configure if want country_state_select with chosen_rails 
+##Configure if want country_state_select with chosen_rails 
 
 Include both the gem in your Gemfile
     gem 'chosen-rails'
@@ -100,14 +100,14 @@ Create one coffee-script file eg scaffold.js.coffee
 	    width: '280px'
 
 And this file must be included in application.js
-  //= require chosen-jquery
-  //= require scaffold
+    //= require chosen-jquery
+    //= require scaffold
  above scaffold is required because we have put the js inside that if you put in other coffee file that that you have to include
 
 And the country select option will be 
-  <%= f.select :country_name, CountryStateSelect::Constant::COUNTRIES, {}, id: 'country_id', :class=>'chosen-select' %>
+    <%= f.select :country_name, CountryStateSelect::Constant::COUNTRIES, {}, id: 'country_id', :class=>'chosen-select' %>
 And the state input box will be 
-  <%= f.text_field :state_name ,:id=>'state_name' %>
+    <%= f.text_field :state_name ,:id=>'state_name' %>
 
 == Contributing to Country State Select
 

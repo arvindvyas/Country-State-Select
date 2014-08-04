@@ -5,7 +5,7 @@ Country State Select is library which gives you all the country names and when y
 #Getting Started
 
 Country State Select is released as a Ruby Gem. The gem is to be installed within a Ruby
-or Rails application. To install, simply add the following to your Gemfile:
+or Rails application. To install, simply add the following to your Gemfile.
 
     gem 'country_state_select'
   

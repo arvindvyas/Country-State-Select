@@ -29,9 +29,6 @@ module CountryStateSelect
     INDIAN_STATES.merge(INDIAN_TERRIOTORY).merge(USA_STATE_LIST).merge(CANADIAN_STATES).merge(UK_STATES)
   end
 
-  module Rails
-
-  end
 end
 
 case ::Rails.version.to_s

@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :country_id %><br>
-    <%= f.select :country_name, CountryStateSelect::Constant::COUNTRIES, {}, id: 'country_id', :class=>'chosen-select' %>
+    <%= f.select :country_name, CountryStateSelect.countries_except('India','asd','Afghanistan'), {}, id: 'country_id', :class=>'chosen-select' %>
  
   </div>
    <div class="field">

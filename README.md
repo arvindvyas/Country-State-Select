@@ -41,7 +41,7 @@ Run bundle install and don't forget to restart your server after you install a n
 
 1.0.1
 
-Added the method 'countries_except' inside this can put all the countries which you do not want in to the country select option just you have to fetch countries by 
+Added method 'countries_except' inside this can put all the countries which you do not want in to the country select option just you have to fetch countries by 
 CountryStateSelect.countries_except('CountryName1','CountryName2'....)
 
 1.0.0

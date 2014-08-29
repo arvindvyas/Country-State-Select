@@ -29,6 +29,15 @@ module CountryStateSelect
     INDIAN_STATES.merge(INDIAN_TERRIOTORY).merge(USA_STATE_LIST).merge(CANADIAN_STATES).merge(UK_STATES)
   end
 
+  #this method will provide the user to opetion to skip any countries in drop down list 
+  def self.countries_except(*except)
+    countries = []
+    COUNTRIES.each do |country|
+      countries<< country unless  country.in?(except)
+    end
+    return countries
+  end
+
 end
 
 case ::Rails.version.to_s

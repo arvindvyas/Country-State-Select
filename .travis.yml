@@ -5,5 +5,5 @@ rvm:
   - 2.0.0
   - 2.1.2
 script:
-  # - bundle exec rake test---if you written test cases then write commands here to run
-  - bundle exec rake
+  # ---if you written test cases then write commands here to run
+  - bundle install

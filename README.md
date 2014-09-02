@@ -1,4 +1,4 @@
-##Country State Select
+##Country State Select [![Build Status](https://travis-ci.org/arvindvyas/Country-State-Select.svg?branch=master)](https://travis-ci.org/arvindvyas/Country-State-Select)
 
 Country State Select is library which gives you all the country names and when you select any country then it also create the other select box with all the states name of that country
 

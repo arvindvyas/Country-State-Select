@@ -1,9 +1,9 @@
 language: ruby
-script: "bundle exec rake test"
-install: script/cached-bundle install --deployment --path vendor/bundle
+
 rvm:
   - 1.9.3
   - 2.0.0
   - 2.1.2
-gemfile:
-  - Gemfile
+script:
+  # - bundle exec rake test---if you written test cases then write commands here to run
+  - bundle exec rake

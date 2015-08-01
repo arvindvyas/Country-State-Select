@@ -5,7 +5,7 @@ module CountryStateSelect
       csc =   CS.states(params[:country_id])
        
        respond_to do |format|
-         format.json { render :json => csc}
+         format.json { render :json => csc.to_a}
       end
 
     end

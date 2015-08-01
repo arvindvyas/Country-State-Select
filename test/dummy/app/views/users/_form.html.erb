@@ -26,7 +26,9 @@
   </div>
    <div class="field">
     <%= f.label :state_name %><br>
-    <%= f.text_field :state_name ,:id=> 'state_name'%>
+     <%= f.select :state_name,  {}, {}, id: 'state_name', :class=>'chosen-select' %>
+ 
+    <%#= f.text_field :state_name ,:id=> 'state_name'%>
   </div>
   <div class="actions">
     <%= f.submit %>

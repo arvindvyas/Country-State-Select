@@ -1,43 +1,37 @@
 require "country_state_select/version"
-
-require 'country_state_select/constant'
+require 'country_state_select/cst_data'
 
 module CountryStateSelect
-  include CountryStateSelect::Constant
- 
+  include CountryStateSelect::CstData
+  
   def self.countries
-    COUNTRIES
+    CountryStateSelect::CstData.countries
   end
 
   def self.india
-    INDIAN_STATES.merge(INDIAN_TERRIOTORY)
+    CountryStateSelect::CstData.states("IN")
   end
 
   def self.us_states
-    USA_STATE_LIST
+    CountryStateSelect::CstData.states("US")
   end
   
   def self.canadian_states
-    CANADIAN_STATES
+    CountryStateSelect::CstData.states("CA")
   end
   
   def self.uk_states 
-    UK_STATES
-  end
-
-  def self.all_states
-    INDIAN_STATES.merge(INDIAN_TERRIOTORY).merge(USA_STATE_LIST).merge(CANADIAN_STATES).merge(UK_STATES)
+    CountryStateSelect::CstData.states("GB")
   end
 
   #this method will provide the user to opetion to skip any countries in drop down list 
   def self.countries_except(*except)
     countries = []
-    COUNTRIES.each do |country|
+    self.countries.each do |country|
       countries<< country unless  country.in?(except)
     end
     return countries
   end
-
 end
 
 case ::Rails.version.to_s

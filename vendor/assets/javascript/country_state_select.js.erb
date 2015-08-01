@@ -1,43 +1,65 @@
 $(document).on('ready page:load', function () {
+  var default_state ;
+  
   $("#country_id").change(function() {
-    var default_state = []
-    var country = $('#country_id option:selected').text()
     var name = $("#state_name").attr("name");
     var select = $('<select name='+ name +' id="state_name"></select>');
-    var indian_state =
-    <%= CountryStateSelect::Constant::INDIAN_STATES %>
-    var usa_state =
-    <%= CountryStateSelect::Constant::USA_STATES %>
-    var canadan_state =
-    <%= CountryStateSelect::Constant::CANADIAN_STATES %>
-    var uk_state =
-    <%= CountryStateSelect::Constant::UK_STATES %>
-    var options = '';
-
-    switch (country) {
-      case "India":
-        default_state = indian_state
-        break
-      case "United Kingdom":
-        default_state = uk_state
-        break;
-      case "Canada":
-        default_state = canadan_state
-        break;
-      case "United States":
-        default_state = usa_state
-        break;
-      default:
-        default_state = []
-    }
   
-    if (default_state.length > 0) {
-      for(var val in default_state) {
-        $('<option />', {value: default_state[val], text: default_state[val]}).appendTo(select);
-      }
-    } else {
-      select = "<input id='state_name' name="+ name +" type='text' value='' />"
+    var country = $('#country_id option:selected').text()
+    var options = '';
+    //default_state = indian_state
+    alert("sdf");
+    find_csc('/find_states', $("#country_id").val());
+    
+   });
+    
+   var find_csc = function(url, id){
+     $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            cache: false,
+            data: {
+                country_id: id },
+            success:function(data) {
+              call_me(data) ;
+             }
+        });
     }
+
+   var call_me = function(data){
+	console.log(data);
+       if (data.length > 0) {
+        for(var val in data) {
+          $('<option />', {value: data[val], text: data[val]}).appendTo(select);
+        }
+      } else {
+        select = "<input id='state_name' name="+ name +" type='text' value='' />"
+      }
     $('#state_name').replaceWith(select); // it will replace what ever inside the id
-  });
+ 
+}
 });
+
+// $(document).on('ready page:load', function () {
+//   $("#country_id").change(function() {
+//     var indian_state =
+    
+
+//     switch (country) {
+//       case "India":
+//         break
+//       case "United Kingdom":
+//         default_state = uk_state
+//         break;
+//       case "Canada":
+//         default_state = canadan_state
+//         break;
+//       case "United States":
+//         default_state = usa_state
+//         break;
+//       default:
+//         default_state = []
+//     }
+  
+// });

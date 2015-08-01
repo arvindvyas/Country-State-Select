@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :country_id %><br>
-    <%= f.select :country_name, CountryStateSelect.countries_except(''), {}, id: 'country_id', :class=>'chosen-select' %>
+    <%= f.select :country_name, CountryStateSelect.countries.collect {|p| [ p[ 1], p[0] ] }, {}, id: 'country_id', :class=>'chosen-select' %>
  
   </div>
    <div class="field">

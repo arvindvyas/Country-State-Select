@@ -8,6 +8,8 @@ $(document).on('ready page:load', function () {
     var country = $('#country_id option:selected').text()
     var options = '';
     //default_state = indian_state
+    $('#state_name').html('');
+
     find_csc('/find_states', $("#country_id").val());
     
    });
@@ -27,19 +29,33 @@ $(document).on('ready page:load', function () {
     }
 
    var call_me = function(data){
-	console.log(data);
-      var name = $("#state_name").attr("name");
-      var select = $('<select name='+ name +' id="state_name"></select>');
+     $("#state_name").html('')
+     name = $("#state_name").attr('name');
+      	 $html= '<select class="chzn-select" id="state_name1" nanme='+name +' >'		
+
+		    		$html+='<option selected=\"selected\" >'+data[0][1]+'</option>';
   
-  
-       if (data.length > 0) {
-        for(var val in data) {
-          $('<option />', {value: data[val], text: data[val]}).appendTo(select);
-        }
-      } else {
-        select = "<input id='state_name' name="+ name +" type='text' value='' />"
-      }
-    $('#state_name').replaceWith(select); // it will replace what ever inside the id
+       for ( var idcount = 1; idcount < data.length; idcount++) {
+		            $html+='<option>'+data[idcount][1]+'</option>';
+		    		
+	    }
+		$html+='</select>';		   
+$('#state_name').html($html);
+$(".chzn-select").chosen();
+
+var state_name= $("#state_name");
+state_name.appendChild("chzn-select");
+
+
+
+    //    if (data.length > 0) {
+    //     for(var val in data) {
+    //       $('<option />', {value: data[val], text: data[val]}).appendTo(select);
+    //     }
+    //   } else {
+    //     select = "<input id='state_name' name="+ name +" type='text' value='' />"
+    //   }
+    // $('#state_name').replaceWith(select); // it will replace what ever inside the id
  
 }
 });

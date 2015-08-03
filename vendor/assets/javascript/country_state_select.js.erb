@@ -4,7 +4,6 @@ $(document).on('ready page:load', function () {
     var country = $('#country_id option:selected').text()
     var options = '';
     $('#state_name').html('');
-    
     find_csc('/find_states', $("#country_id").val());
   });
   var find_csc = function(url, id){
@@ -22,19 +21,24 @@ $(document).on('ready page:load', function () {
     });
   }
   var create_select = function(data){
-    name = $('#state_name').attr('name');
-    class_name = $('#state_name').attr('class');
-    $html= '<select class='+class_name+' id="state_name" name='+name+' >'		
-    $html+='<option selected=\"selected\" >'+data[0][1]+'</option>';
+    if (data.length === 0){
+      $html = "<input id='state_name' name="+ name +" class="+class_name+" type='text' value='' />"
+    }else{
+      name = $('#state_name').attr('name');
+      class_name = $('#state_name').attr('class');
+      $html= '<select class='+class_name+' id="state_name" name='+name+' >'		
+      $html+='<option selected=\"selected\" >'+data[0][1]+'</option>';
       
-    for ( var idcount = 1; idcount < data.length; idcount++) {
-	  $html+='<option>'+data[idcount][1]+'</option>';
-	}
-    $html+='</select>';		   
-    $('#state_name').replaceWith($html);
-    if (class_name === 'chosen-select'){
-      $('.'+class_name+'').chosen();
+      for ( var idcount = 1; idcount < data.length; idcount++) {
+	    $html+='<option>'+data[idcount][1]+'</option>';
+	  }
+      $html+='</select>';		   
     }
     
-  }
+    $('#state_name').replaceWith($html);
+    if (class_name === 'chosen-select' && data.length >0){
+      $('.'+class_name+'').chosen();
+    }
+   
+   } 
 });

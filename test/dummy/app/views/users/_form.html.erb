@@ -24,12 +24,9 @@
     <%= f.select :country_name, CountryStateSelect.countries.collect {|p| [ p[ 1], p[0] ] }, {}, id: 'country_id', :class=>'chosen-select' %>
  
   </div>
-   <div class="field" name='user[state_name]'>
+   <div class="field">
     <%= f.label :state_name %><br>
-
-    <div id="state_name" name='user[state_id]'></div>
-    
-    <%#= f.text_field :state_name ,:id=> 'state_name'%>
+    <%= f.select :state_name, [], {}, id: 'state_name', :class=>'chosen-select' %>
   </div>
   <div class="actions">
     <%= f.submit %>

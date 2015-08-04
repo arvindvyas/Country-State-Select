@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
-  post 'find_states' => 'country_state_select/cscs#find_states'
-  get 'find_states' => 'country_state_select/cscs#find_states'
+ scope :module => "country_state_select" do
+  post 'find_states' => 'cscs#find_states'
+  get 'find_states' => 'cscs#find_states'
+end
 end

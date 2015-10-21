@@ -1,37 +1,43 @@
 require "country_state_select/version"
-require 'country_state_select/cst_data'
+require "city-state"
+require "rails"
+require "sass-rails"
+require "compass-rails"
+require "chosen-rails"
+require "simple_form"
 
 module CountryStateSelect
-  include CountryStateSelect::CstData
-  
-  def self.countries
-    CountryStateSelect::CstData.countries
+
+  #Collect the Countries
+  def self.countries_collection
+    CS.countries.except!(:COUNTRY_ISO_CODE).collect {|p| [ p[ 1], p[0] ] }.compact
   end
 
-  def self.india
-    CountryStateSelect::CstData.states("IN")
-  end
-
-  def self.us_states
-    CountryStateSelect::CstData.states("US")
-  end
-  
-  def self.canadian_states
-    CountryStateSelect::CstData.states("CA")
-  end
-  
-  def self.uk_states 
-    CountryStateSelect::CstData.states("GB")
-  end
-
-  #this method will provide the user to opetion to skip any countries in drop down list 
+  #Pass array of unwanted countries to get back all except those in the array
   def self.countries_except(*except)
-    countries = []
-    self.countries.each do |country|
-      countries<< country unless  country.in?(except)
-    end
-    return countries
+    countries_collection.collect { |c| c unless except.include?(c.second) }.compact
   end
+
+  #Return either the State (String) or States (Array)
+  def self.states_collection(f, options)
+    states = collect_states(f.object.send(options[:country]))
+    return f.object.send(options[:state]) if states.size == 0
+    states
+  end
+
+  #Return the collected States for a given Country
+  def self.collect_states(country)
+    CS.states(country).collect {|p| [ p[1], p[1] ] }.compact
+  end
+
+  #Return a hash for use in the simple_form
+  def self.state_options(options)
+    states = states_collection(options[:form], options[:field_names])
+    options = options.merge(collection: states)
+    options = options.merge(:as => :string) if states.class == String
+    options
+  end
+
 end
 
 case ::Rails.version.to_s

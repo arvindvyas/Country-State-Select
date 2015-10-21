@@ -1,0 +1,13 @@
+<%= simple_form_for @location do |f| %>
+
+    <%= f.input :test_country, label: "Country", collection: CountryStateSelect.countries_collection %>
+
+    <%= f.input :test_state, CountryStateSelect.state_options(label: "State / Province", form: f, field_names: { :country => :test_country, :state => :home_state } ) %>
+
+    <br /><br />
+
+    <%= f.button :submit %>
+
+    <%= link_to "Cancel", locations_path, class: "btn btn-danger" %>
+
+<% end %>

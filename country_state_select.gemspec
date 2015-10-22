@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = CountryStateSelect::VERSION
   spec.authors       = ["Arvind Vyas", "Adam De Fouw"]
   spec.email         = ["arvindvyas07@gmail.com", "aldefouw@medicine.wisc.edu"]
-  spec.summary       = %q{Dynamically select country and state.}
-  spec.description   = %q{Country Region Select is a Ruby Gem that aims to make Country and State/Province selection a cinch in Ruby on Rails environments.}
+  spec.summary       = %q{Dynamically select Country and State.}
+  spec.description   = %q{Country State Select is a Ruby Gem that aims to make Country and State/Province selection a cinch in Ruby on Rails environments.}
   spec.homepage      = "https://github.com/aldefouw/country_state_select.git"
   spec.license       = "MIT"
 

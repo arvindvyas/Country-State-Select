@@ -133,9 +133,9 @@ describe CountryStateSelect do
       expect(method_call.class).to eq(Array)
     end
 
-    it "returns the same value for the key and value" do
+    it "returns the diffrent value for the key and value" do
       method_call = CountryStateSelect.collect_states('US')
-      expect(method_call.first.first).to eq(method_call.first.second)
+      expect(method_call.first.first).not_to eq(method_call.first.second)
     end
 
     it "returns the value part of the key-value pair" do
@@ -145,6 +145,26 @@ describe CountryStateSelect do
 
     it "returns an empty array if there are no states in that Country" do
       method_call = CountryStateSelect.collect_states('MF')
+      expect(method_call).to eq([])
+    end
+  end
+
+  describe '#collect_cities' do
+
+    it "returns an array" do
+      method_call = CountryStateSelect.collect_cities(:mp, :in)
+      expect(method_call.class).to eq(Array)
+    end
+
+    it "it should return same value if city is not duplicate with state with out sending country" do
+      city_without_country = CountryStateSelect.collect_cities(:mp, '')
+      city_with_country = CountryStateSelect.collect_cities(:mp, :in)
+      expect(city_without_country).to eq(city_with_country)
+    end
+
+
+    it "returns an empty array if there are no states in that Country" do
+      method_call = CountryStateSelect.collect_cities('', '')
       expect(method_call).to eq([])
     end
   end

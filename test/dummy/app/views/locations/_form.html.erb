@@ -4,6 +4,8 @@
 
     <%= f.input :test_state, CountryStateSelect.state_options(label: "State / Province", form: f, field_names: { :country => :test_country, :state => :home_state } ) %>
 
+    <%= f.input :test_city, label: "State / Province" %>
+
     <br /><br />
 
     <%= f.button :submit %>

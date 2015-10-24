@@ -6,4 +6,6 @@ rvm:
   - 2.1.2
 script:
   # ---if you written test cases then write commands here to run
+
   - bundle install
+  - rspec

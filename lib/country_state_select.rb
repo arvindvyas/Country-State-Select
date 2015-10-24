@@ -27,7 +27,12 @@ module CountryStateSelect
 
   #Return the collected States for a given Country
   def self.collect_states(country)
-    CS.states(country).collect {|p| [ p[1], p[1] ] }.compact
+    CS.states(country).collect {|p| [ p[1], p[0] ] }.compact
+  end
+
+  #Return the cities of given state and country
+  def self.collect_cities(state_id = '', country_id = '')
+    CS.cities(state_id.to_sym, country_id.to_sym)
   end
 
   #Return a hash for use in the simple_form

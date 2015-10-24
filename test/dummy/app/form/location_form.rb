@@ -6,5 +6,6 @@ class LocationForm < Reform::Form
 
   property :test_country
   property :test_state
+  property :test_city
 
 end

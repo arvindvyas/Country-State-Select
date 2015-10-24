@@ -29,7 +29,6 @@ function CountryStateSelect(options) {
 
   function citiesDropdown() {
      $("#" + state_id).change(function () {
-      alert('asdf');
       return findCities($("#" + state_id).val(),$("#" + country_id).val());
     });
   }

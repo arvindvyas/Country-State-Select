@@ -14,7 +14,6 @@ function CountryStateSelect(options) {
   return statesDropdown();
 
   // ====== ***** METHODS ***** ===================================================================== //
-
   function statesDropdown() {
 
     addChosenToCountry();
@@ -63,6 +62,7 @@ function CountryStateSelect(options) {
   function removeChosenFromFields(){
     if (chosenIsRequired) {
       $("#" + options['state_id'] + "_chosen").remove();
+      $("#" + options['city_id'] + "_chosen").remove();
     }
   }
 
@@ -80,6 +80,7 @@ function CountryStateSelect(options) {
 
     //Remove all Chosen from existing fields
     removeChosenFromFields();
+    findCities('','')
 
     //Perform AJAX request to get the data; on success, build the dropdown
     $.ajax({
@@ -126,6 +127,7 @@ function CountryStateSelect(options) {
 
       html += '</select>';
     }
+
 
     $('#' + state_id).replaceWith(html);
 

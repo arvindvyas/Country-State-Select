@@ -25,6 +25,13 @@ module CountryStateSelect
     states
   end
 
+   #Return either the City (String) or Cities (Array)
+  def self.cities_collection(f, options)
+    cities = collect_cities(f.object.send(options[:state]))
+    cities
+  end
+
+
   #Return the collected States for a given Country
   def self.collect_states(country)
     CS.states(country).collect {|p| [ p[1], p[0] ] }.compact
@@ -32,7 +39,11 @@ module CountryStateSelect
 
   #Return the cities of given state and country
   def self.collect_cities(state_id = '', country_id = '')
-    CS.cities(state_id.to_sym, country_id.to_sym)
+    if state_id.nil? || country_id.nil?
+      []
+    else
+      CS.cities(state_id.to_sym, country_id.to_sym)
+    end
   end
 
   #Return a hash for use in the simple_form
@@ -40,6 +51,13 @@ module CountryStateSelect
     states = states_collection(options[:form], options[:field_names])
     options = options.merge(collection: states)
     options = options.merge(:as => :string) if states.class == String
+    options
+  end
+
+  def self.city_options(options)
+    cities =  cities_collection(options[:form], options[:field_names])
+    options = options.merge(collection: cities)
+    options = options.merge(:as => :string) if cities.class == String
     options
   end
 

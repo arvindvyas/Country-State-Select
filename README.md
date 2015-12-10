@@ -8,6 +8,9 @@ For instance, if a user chooses "United States of America" for a Country dropdow
 
 The data for Countries and States is populated by the excellent [city-state](https://github.com/loureirorg/city-state) gem. 
 
+#Demo Of the Gem
+  https://country-state-select.herokuapp.com
+
 #Getting Started
 
 Country State Select is released as a Ruby Gem and requires the Rails environment as well.

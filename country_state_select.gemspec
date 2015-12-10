@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["arvindvyas07@gmail.com"]
   spec.summary       = %q{Dynamically select Country and State.}
   spec.description   = %q{Country State Select is a Ruby Gem that aims to make Country and State/Province selection a cinch in Ruby on Rails environments.}
-  spec.homepage      = "https://github.com/aldefouw/country_state_select.git"
+  spec.homepage      = "https://github.com/arvindvyas/Country-State-Select"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

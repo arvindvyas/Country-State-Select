@@ -34,14 +34,14 @@ function CountryStateSelect(options) {
 
   function addChosenToState(){
     if (chosenIsRequired && stateIsNotText()) {
-      $('#' + state_id).chosen();
+      $('#' + state_id).chosen(options['chosen_options']);
     }
   }
 
   function addChosenToCity(){
 
     if (chosenIsRequired && cityIsNotText()) {
-      $('#' + city_id).chosen();
+      $('#' + city_id).chosen(options['chosen_options']);
     }
   }
 
@@ -55,7 +55,7 @@ function CountryStateSelect(options) {
 
   function addChosenToCountry(){
     if (chosenIsRequired) {
-      $('#' + country_id).chosen();
+      $('#' + country_id).chosen(options['chosen_options']);
     }
   }
 

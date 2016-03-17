@@ -119,6 +119,10 @@ To turn it on, set it to true:
     $(document).on('ready page:load', function() {
       return CountryStateSelect({
         chosen_ui: true,
+        chosen_options: { 
+          disable_search_threshold: 10,
+          width: '95%'
+        },
         ...
         ...
         ...

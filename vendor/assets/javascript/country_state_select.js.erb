@@ -33,13 +33,13 @@ function CountryStateSelect(options) {
   }
 
   function addChosenToState(){
-    if (chosenIsRequired && stateIsNotText()) {
+    if (chosenIsRequired() && stateIsNotText()) {
       $('#' + state_id).chosen(options['chosen_options']);
     }
   }
 
   function addChosenToCity(){
-    if (chosenIsRequired && cityIsNotText()) {
+    if (chosenIsRequired() && cityIsNotText()) {
       $('#' + city_id).chosen(options['chosen_options']);
     }
   }
@@ -53,7 +53,7 @@ function CountryStateSelect(options) {
   }
 
   function addChosenToCountry(){
-    if (chosenIsRequired) {
+    if (chosenIsRequired()) {
       $('#' + country_id).chosen(options['chosen_options']);
     }
   }

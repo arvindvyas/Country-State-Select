@@ -49,15 +49,19 @@ module CountryStateSelect
   #Return a hash for use in the simple_form
   def self.state_options(options)
     states = states_collection(options[:form], options[:field_names])
-    options = options.merge(collection: states)
-    options = options.merge(:as => :string) if states.class == String
-    options
+    options = self.merge_hash(options, states)
   end
 
+  #Return a hash for use in the simple_form
   def self.city_options(options)
     cities =  cities_collection(options[:form], options[:field_names])
-    options = options.merge(collection: cities)
-    options = options.merge(:as => :string) if cities.class == String
+    options = self.merge_hash(options, cities)
+  end
+
+  # Create hash to use in the simple_form
+  def self.merge_hash(options, collections)
+    options = options.merge(collection: collections)
+    options = options.merge(:as => :string) if collections.class == String
     options
   end
 

@@ -14,8 +14,8 @@ describe CountryStateSelect do
 
     it "returns the value first and the key second" do
       method_call = CountryStateSelect.countries_collection
-      expect(method_call.first.first).to eq("Andorra")
-      expect(method_call.first.second).to eq(:AD)
+      expect(method_call[0][0]).to eq("Andorra")
+      expect(method_call[0][1]).to eq(:AD)
     end
   end
 
@@ -25,6 +25,7 @@ describe CountryStateSelect do
     let(:exceptions) {  [us, sm]  }
 
     it 'does include the United States ordinarily' do
+      binding.pry
       expect(CountryStateSelect.countries_except([])).to include(us)
     end
 
@@ -135,7 +136,7 @@ describe CountryStateSelect do
 
     it "returns the diffrent value for the key and value" do
       method_call = CountryStateSelect.collect_states('US')
-      expect(method_call.first.first).not_to eq(method_call.first.second)
+      expect(method_call[0][0]).not_to eq(method_call[0][1])
     end
 
     it "returns the value part of the key-value pair" do

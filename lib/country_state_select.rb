@@ -11,7 +11,7 @@ module CountryStateSelect
 
   #Pass array of unwanted countries to get back all except those in the array
   def self.countries_except(*except)
-    countries_collection.collect { |c| c unless except.include?(c.second) }.compact
+    countries_collection.collect { |c| c unless except.include?(c[1]) }.compact
   end
 
   #Return either the State (String) or States (Array)

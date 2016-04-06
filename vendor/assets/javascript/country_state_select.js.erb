@@ -10,7 +10,6 @@ function CountryStateSelect(options) {
   var city_name = $('#' + city_id).attr('name');
   var city_class = $('#' + city_id).attr('class');
 
-
   return statesDropdown();
 
   // ====== ***** METHODS ***** ===================================================================== //
@@ -119,6 +118,7 @@ function CountryStateSelect(options) {
       html = '<input id="' + state_id + '" name="' + state_name + '" class="' + state_class + '" type="text"  type="text" value="" >';
     } else {
       html = '<select id="' + state_id + '" name="' + state_name + '" class="' + state_class + '" >';
+      html += '<option>'+ find_select_option_text('state') +'</option>'
 
       for (i = 0; i < data.length; i++) {
         html += '<option value='+data[i][0]+'>' + data[i][1] + '</option>';
@@ -142,13 +142,22 @@ function CountryStateSelect(options) {
 
   }
 
+  function find_select_option_text(type){
+     if (type === 'city'){
+       return options['city_place_holder'];
+     }else{
+       return options['state_place_holder']
+     }
+
+  }
+
   function buildCitiesDropdown(data) {
-    console.log(data)
+
     if (data.length === 0) {
       html = '<input id="' + city_id + '" name="' + city_name + '" class="' + city_class + '" type="text"  type="text" value="" >';
     } else {
       html = '<select id="' + city_id + '" name="' + city_name + '" class="' + city_class + '" >';
-
+      html += '<option>'+ find_select_option_text('city') +'</option>'
       for (i = 0; i < data.length; i++) {
         html += '<option>' + data[i] + '</option>';
       }

@@ -23,13 +23,12 @@ group :test do
   gem "launchy", "~> 2.4"
   gem "poltergeist", "~> 1.7"
   gem "selenium-webdriver", "~> 2.47"
-  gem "capybara-webkit"
   gem "simplecov", "~> 0.10"
 end
 
 gem 'chosen-rails'
 gem "rails", "~> 4.2"
-gem "pg"
+gem 'pg', '~> 0.18'
 gem "sass-rails", "~> 5.0"
 gem "uglifier", "~> 2.7"
 gem "coffee-rails", "~> 4.1"
@@ -40,6 +39,6 @@ gem "sdoc", "~> 0.4", {:group=>:doc}
 gem "bootstrap-sass", "~> 3.3"
 
 gem "simple_form", "~> 3.2"
-gem "reform", "~> 2.0"
+gem "reform-rails"
 
 gem 'country_state_select', path: '../../'

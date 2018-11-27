@@ -1,4 +1,5 @@
-##Country State Select [![Build Status](https://travis-ci.org/arvindvyas/Country-State-Select.svg?branch=master)](https://travis-ci.org/arvindvyas/Country-State-Select)  [![Code Climate](https://codeclimate.com/github/arvindvyas/Country-State-Select/badges/gpa.svg)](https://codeclimate.com/github/arvindvyas/Country-State-Select)
+## Country State Select 
+[![Build Status](https://travis-ci.org/arvindvyas/Country-State-Select.svg?branch=master)](https://travis-ci.org/arvindvyas/Country-State-Select)  [![Code Climate](https://codeclimate.com/github/arvindvyas/Country-State-Select/badges/gpa.svg)](https://codeclimate.com/github/arvindvyas/Country-State-Select)
 
 Country State Select is a library that provides an easy API to generate Country , State / Province  and City dropdowns for use in forms.
 
@@ -8,10 +9,10 @@ For instance, if a user chooses "United States of America" for a Country dropdow
 
 The data for Countries and States is populated by the excellent [city-state](https://github.com/loureirorg/city-state) gem. 
 
-#Demo Of the Gem
+# Demo
   https://country-state-select.herokuapp.com
 
-#Getting Started
+# Getting Started
 
 Country State Select is released as a Ruby Gem and requires the Rails environment as well.
 
@@ -53,11 +54,11 @@ Don't forget to restart your server after you install it.
 Implementation in a view is simple. 
 
 Just create a simple_form object like so:
-
-    <%= simple_form_for @form_object do |f| 
-      f.button :submit
-    end %>
-    
+```ruby
+<%= simple_form_for @form_object do |f| 
+  f.button :submit
+end %>
+```    
 Once your form object is created, add in fields for your user to select a Country and State / Province.      
 
 ## Country Field
@@ -89,18 +90,19 @@ Any options that are valid in simple_form field can be passed into the options h
 The magic of the library is the JavaScript that is performed on the fields.  This JavaScript needs to be included in order for the proper State / Provinces to be selected based upon your Country selection.  
 
 Add this JavaScript to the page that is loading your form:
-
-    $(document).on('ready page:load', function() {
-      return CountryStateSelect({
-        country_id: "country_field_id",
-        state_id: "state_field_id"
-      });
-    });
-
+```javascript
+$(document).on('ready page:load', function() {
+  return CountryStateSelect({
+    country_id: "country_field_id",
+    state_id: "state_field_id"
+  });
+});
+```
 If you are using CoffeeScript, use the following:
-
-    $(document).on 'ready page:load', ->
-        CountryStateSelect({ country_id: "country_field_id", state_id: "state_field_id" })
+```coffescript
+$(document).on 'ready page:load', ->
+    CountryStateSelect({ country_id: "country_field_id", state_id: "state_field_id" })
+ ```
 
 The country_id accepts the form ID for the country field.  The state_id accepts the form ID for the state field.
 
@@ -115,33 +117,32 @@ The ID being referred to is like the following in a select menu:
 The CountryStateSelect interface offers the option to turn the Chosen library on or off.  
 
 To turn it on, set it to true:
-
-    $(document).on('ready page:load', function() {
-      return CountryStateSelect({
-        chosen_ui: true,
-        chosen_options: { 
-          disable_search_threshold: 10,
-          width: '95%'
-        },
-        ...
-        ...
-        ...
-      });
-    }); 
-
+```javascript
+$(document).on('ready page:load', function() {
+  return CountryStateSelect({
+    chosen_ui: true,
+    chosen_options: { 
+      disable_search_threshold: 10,
+      width: '95%'
+    },
+    ...
+    ...
+    ...
+  });
+}); 
+```
 To turn it off, set it to false:
+```javascript
+$(document).on('ready page:load', function() {
+  return CountryStateSelect({
+    chosen_ui: false,
+    ...
+    ...
+    ...
+  });
+});
+```    
 
-    $(document).on('ready page:load', function() {
-      return CountryStateSelect({
-        chosen_ui: false,
-        ...
-        ...
-        ...
-      });
-    });
-    
-
-##Contributing to Country State Select
-
+## Contributing
   Fork, fix, then send a pull request.
  

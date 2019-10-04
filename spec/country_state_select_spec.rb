@@ -25,7 +25,6 @@ describe CountryStateSelect do
     let(:exceptions) {  [us, sm]  }
 
     it 'does include the United States ordinarily' do
-      binding.pry
       expect(CountryStateSelect.countries_except([])).to include(us)
     end
 

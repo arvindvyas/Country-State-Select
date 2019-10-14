@@ -26,7 +26,9 @@ Then run
 
 
 Don't forget to restart your server after you install it.
-
+## Setup Gem
+if not autoloaded than please add in your application.js
+      //= require country_state_select
 
 ## chosen JavaScript assets
   The application makes use of the chosen-rails library for a better user experience.  This can be disabled if desired.  

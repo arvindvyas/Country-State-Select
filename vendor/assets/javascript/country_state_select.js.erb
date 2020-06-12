@@ -3,6 +3,7 @@ function CountryStateSelect(options) {
   var state_id = options['state_id'];
   var country_id = options['country_id'];
   var city_id = options['city_id'];
+  var $ = options['jQueryObject'] || $;
 
   var state_name = $('#' + state_id).attr('name');
   var state_class = $('#' + state_id).attr('class');

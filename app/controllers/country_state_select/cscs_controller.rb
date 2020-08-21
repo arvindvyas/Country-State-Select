@@ -1,6 +1,9 @@
 # @author : Arvind Vyas
 module CountryStateSelect
   class CscsController < ApplicationController
+    skip_after_action :verify_authorized
+    skip_before_action :authenticate_user!
+
     def find_states
       csc = CS.states(params[:country_id])
 

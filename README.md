@@ -24,6 +24,8 @@ Then run
     
     bundle install
 
+# NOTE 
+In the latest version we have removed all the dependencies of js and you are feel free to use any js you can use predefine method to populate data
 
 Don't forget to restart your server after you install it.
 ## Setup Gem

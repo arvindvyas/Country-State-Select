@@ -1,6 +1,11 @@
-# frozen_string_literal: true
+if RUBY_VERSION > '1.9.3'
+  # frozen_string_literal: true
+  lib = File.expand_path('lib', __dir__)
+else
+ # coding: utf-8
+ lib = File.expand_path('../lib', __FILE__)
+end
 
-lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'country_state_select/version'
 

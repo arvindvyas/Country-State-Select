@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @author : Arvind Vyas
 module CountryStateSelect
   class CscsController < ApplicationController

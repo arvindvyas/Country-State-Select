@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe CountryStateSelect do
@@ -75,7 +77,9 @@ describe CountryStateSelect do
 
   describe '#states_options' do
     let(:f) { double(object: {}) }
-    let(:options) { { form: f, label: 'State / Province', field_names: { country: :country_field_name, state: :state_field_name } } }
+    let(:options) do
+      { form: f, label: 'State / Province', field_names: { country: :country_field_name, state: :state_field_name } }
+    end
 
     it 'should return a Hash' do
       expect(f.object).to receive(:country_field_name).and_return('US')
@@ -162,7 +166,7 @@ describe CountryStateSelect do
 
     it 'returns an empty array if there are no states in that Country' do
       method_call = CountryStateSelect.collect_cities('', '')
-      expect(method_call).to eq([])
+      expect(method_call).to eq(nil)
     end
   end
 end

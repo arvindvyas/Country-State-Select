@@ -1,5 +1,8 @@
 ## Country State Select 
-[![Build Status](https://travis-ci.org/arvindvyas/Country-State-Select.svg?branch=master)](https://travis-ci.org/arvindvyas/Country-State-Select)  [![Code Climate](https://codeclimate.com/github/arvindvyas/Country-State-Select/badges/gpa.svg)](https://codeclimate.com/github/arvindvyas/Country-State-Select)
+[![Build Status](https://travis-ci.org/arvindvyas/Country-State-Select.svg?branch=master)](https://travis-ci.org/arvindvyas/Country-State-Select)  
+[![Code Climate](https://codeclimate.com/github/arvindvyas/Country-State-Select/badges/gpa.svg)](https://codeclimate.com/github/arvindvyas/Country-State-Select)
+
+
 
 Country State Select is a library that provides an easy API to generate Country , State / Province  and City dropdowns for use in forms.
 
@@ -24,9 +27,13 @@ Then run
     
     bundle install
 
+# NOTE 
+In the latest version we have removed all the dependencies of js and you are feel free to use any js you can use predefine method to populate data
 
 Don't forget to restart your server after you install it.
-
+## Setup Gem
+if not autoloaded than please add in your application.js
+      //= require country_state_select
 
 ## chosen JavaScript assets
   The application makes use of the chosen-rails library for a better user experience.  This can be disabled if desired.  

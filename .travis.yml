@@ -1,10 +1,14 @@
 language: ruby
 
 rvm:
-  - 1.9.3
   - 2.0.0
   - 2.1.2
+  - 2.2.0
+  - 2.5.0
+  - 2.6.5
+  - 3.0.0
   - 3.1.0
+  
 script:
   # ---if you written test cases then write commands here to run
 

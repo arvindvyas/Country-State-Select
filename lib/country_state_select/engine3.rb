@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @author Sachin Singh
 
 module CountryStateSelect

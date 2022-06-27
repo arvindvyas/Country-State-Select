@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'country_state_select/version'
 require 'city-state'
 require 'rails'
@@ -17,6 +19,7 @@ module CountryStateSelect
   def self.states_collection(f, options)
     states = collect_states(f.object.send(options[:country]))
     return f.object.send(options[:state]) if states.empty?
+
     states
   end
 
@@ -33,6 +36,7 @@ module CountryStateSelect
   # Return the cities of given state and country
   def self.collect_cities(state_id = '', country_id = '')
     return [] if state_id.nil? || country_id.nil?
+
     CS.cities(state_id.to_sym, country_id.to_sym)
   end
 
@@ -51,7 +55,7 @@ module CountryStateSelect
   # Create hash to use in the simple_form
   def self.merge_hash(options, collections)
     options = options.merge(collection: collections)
-    options = options.merge(as: :string) if collections.class == String
+    options = options.merge(as: :string) if collections.instance_of?(String)
     options
   end
 end
@@ -61,7 +65,7 @@ when /[4-6]/
   require 'country_state_select/engine'
 when /^3\.[12]/
   require 'country_state_select/engine3'
-when /^3\.[0]/
+when /^3\.0/
   require 'country_state_select/railtie'
 else
   raise 'Unsupported rails version'

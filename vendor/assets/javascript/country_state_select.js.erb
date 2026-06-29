@@ -10,6 +10,8 @@ function CountryStateSelect(options) {
   var city_name = $('#' + city_id).attr('name');
   var city_class = $('#' + city_id).attr('class');
 
+  var hasCityField = typeof city_name !== "undefined";
+
   return statesDropdown();
 
   // ====== ***** METHODS ***** ===================================================================== //
@@ -23,11 +25,18 @@ function CountryStateSelect(options) {
       return findStates($(this).val());
     });
 
+    // Bind the city lookup ONCE via event delegation. The state <select> is
+    // swapped out by replaceWith() on every country change, so a directly-bound
+    // handler would be lost (the old code re-bound it on every build, stacking
+    // duplicate listeners and firing multiple AJAX calls per change).
+    if (hasCityField) {
+      citiesDropdown();
+    }
   }
 
   function citiesDropdown() {
-     $("#" + state_id).change(function () {
-      return findCities($("#" + state_id).val(),$("#" + country_id).val());
+    $(document).on('change', '#' + state_id, function () {
+      return findCities($("#" + state_id).val(), $("#" + country_id).val());
     });
   }
 
@@ -74,6 +83,12 @@ function CountryStateSelect(options) {
     return options.hasOwnProperty("chosen_ui") && options['chosen_ui'];
   }
 
+  // Escape values before interpolating them into markup so names containing
+  // quotes, angle brackets or ampersands can't break the option or inject HTML.
+  function escapeHtml(value){
+    return $('<div>').text(value == null ? '' : value).html();
+  }
+
   function findStates(id) {
 
     //Remove all Chosen from existing fields
@@ -83,7 +98,7 @@ function CountryStateSelect(options) {
     //Perform AJAX request to get the data; on success, build the dropdown
     $.ajax({
       url: "/find_states",
-      type: 'post',
+      type: 'get',
       dataType: 'json',
       cache: false,
       data: {country_id: id},
@@ -99,8 +114,7 @@ function CountryStateSelect(options) {
     //Perform AJAX request to get the data; on success, build the dropdown
     $.ajax({
       url: "/find_cities",
-      type: 'post',
-
+      type: 'get',
       dataType: 'json',
       cache: false,
       data: {
@@ -113,20 +127,20 @@ function CountryStateSelect(options) {
 
   //Build the HTML for our dropdown menus
   function buildStatesDropdown(data) {
+    var html;
 
     if (data.length === 0) {
-      html = '<input id="' + state_id + '" name="' + state_name + '" class="' + state_class + '" type="text"  type="text" value="" >';
+      html = '<input id="' + state_id + '" name="' + state_name + '" class="' + state_class + '" type="text" value="" >';
     } else {
       html = '<select id="' + state_id + '" name="' + state_name + '" class="' + state_class + '" >';
-      html += '<option>'+ find_select_option_text('state') +'</option>'
+      html += '<option>' + escapeHtml(find_select_option_text('state')) + '</option>';
 
-      for (i = 0; i < data.length; i++) {
-        html += '<option value='+data[i][0]+'>' + data[i][1] + '</option>';
+      for (var i = 0; i < data.length; i++) {
+        html += '<option value="' + escapeHtml(data[i][0]) + '">' + escapeHtml(data[i][1]) + '</option>';
       }
 
       html += '</select>';
     }
-
 
     $('#' + state_id).replaceWith(html);
 
@@ -134,12 +148,6 @@ function CountryStateSelect(options) {
     if (data.length > 0) {
       addChosenToState();
     }
-
-    // [142] FIXME # Is there any other way to call city method , it is adding change method in every state change 
-    if(typeof city_name !== "undefined" ){
-      citiesDropdown();
-    };
-
   }
 
   function find_select_option_text(type){
@@ -152,14 +160,15 @@ function CountryStateSelect(options) {
   }
 
   function buildCitiesDropdown(data) {
+    var html;
 
     if (data.length === 0) {
-      html = '<input id="' + city_id + '" name="' + city_name + '" class="' + city_class + '" type="text"  type="text" value="" >';
+      html = '<input id="' + city_id + '" name="' + city_name + '" class="' + city_class + '" type="text" value="" >';
     } else {
       html = '<select id="' + city_id + '" name="' + city_name + '" class="' + city_class + '" >';
-      html += '<option>'+ find_select_option_text('city') +'</option>'
-      for (i = 0; i < data.length; i++) {
-        html += '<option>' + data[i] + '</option>';
+      html += '<option>' + escapeHtml(find_select_option_text('city')) + '</option>';
+      for (var i = 0; i < data.length; i++) {
+        html += '<option>' + escapeHtml(data[i]) + '</option>';
       }
 
       html += '</select>';

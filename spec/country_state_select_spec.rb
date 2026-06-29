@@ -164,9 +164,9 @@ describe CountryStateSelect do
       expect(city_without_country).to eq(city_with_country)
     end
 
-    it 'returns an empty array if there are no states in that Country' do
+    it 'returns an empty array if there are no cities for that state/country' do
       method_call = CountryStateSelect.collect_cities('', '')
-      expect(method_call).to eq(nil)
+      expect(method_call).to eq([])
     end
   end
 end

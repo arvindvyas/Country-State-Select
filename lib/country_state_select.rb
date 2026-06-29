@@ -7,7 +7,10 @@ require 'rails'
 module CountryStateSelect
   # Collect the Countries
   def self.countries_collection
-    CS.countries.except!(:COUNTRY_ISO_CODE).collect { |p| [p[1], p[0]] }.compact
+    # NOTE: use the non-mutating `reject` here. `CS.countries` returns the hash
+    # that city-state memoizes for the whole process, so calling `except!`
+    # (bang) on it would permanently strip the key from the gem's cached data.
+    CS.countries.reject { |k, _| k == :COUNTRY_ISO_CODE }.collect { |p| [p[1], p[0]] }.compact
   end
 
   # Pass array of unwanted countries to get back all except those in the array
@@ -35,9 +38,12 @@ module CountryStateSelect
 
   # Return the cities of given state and country
   def self.collect_cities(state_id = '', country_id = '')
-    return [] if state_id.nil? || country_id.nil?
+    return [] if state_id.nil? || country_id.nil? || state_id.to_s.empty?
 
-    CS.cities(state_id.to_sym, country_id.to_sym)
+    # CS.cities can return false/nil when it has no data for the pair; always
+    # hand back an Array so callers can rely on a consistent (empty) shape, the
+    # same way collect_states does.
+    CS.cities(state_id.to_sym, country_id.to_sym) || []
   end
 
   # Return a hash for use in the simple_form

@@ -1,5 +1,5 @@
 ## Country State Select 
-[![Build Status](https://travis-ci.org/arvindvyas/Country-State-Select.svg?branch=master)](https://travis-ci.org/arvindvyas/Country-State-Select)  
+[![CI](https://github.com/arvindvyas/Country-State-Select/actions/workflows/ci.yml/badge.svg)](https://github.com/arvindvyas/Country-State-Select/actions/workflows/ci.yml)  
 [![Code Climate](https://codeclimate.com/github/arvindvyas/Country-State-Select/badges/gpa.svg)](https://codeclimate.com/github/arvindvyas/Country-State-Select)
 
 
@@ -11,9 +11,6 @@ When implemented correctly, a State / Province dropdown is filled with appropria
 For instance, if a user chooses "United States of America" for a Country dropdown, the State dropdown will be filled with the 50 appropriate states plus the District of Columbia also then user can list city according to state selection but currently cities are limited.
 
 The data for Countries and States is populated by the excellent [city-state](https://github.com/loureirorg/city-state) gem. 
-
-# Demo
-  https://country-state-select.herokuapp.com
 
 # Getting Started
 
@@ -98,7 +95,7 @@ The magic of the library is the JavaScript that is performed on the fields.  Thi
 
 Add this JavaScript to the page that is loading your form:
 ```javascript
-$(document).on('ready page:load', function() {
+$(document).on('ready turbo:load', function() {
   return CountryStateSelect({
     country_id: "country_field_id",
     state_id: "state_field_id"
@@ -106,10 +103,14 @@ $(document).on('ready page:load', function() {
 });
 ```
 If you are using CoffeeScript, use the following:
-```coffescript
-$(document).on 'ready page:load', ->
+```coffeescript
+$(document).on 'ready turbo:load', ->
     CountryStateSelect({ country_id: "country_field_id", state_id: "state_field_id" })
  ```
+
+> **Note:** `turbo:load` is the event fired by [Turbo](https://turbo.hotwired.dev/)
+> (Rails 7+). If your app still uses classic Turbolinks, use `page:load`
+> instead; on a plain app without Turbo, `ready` alone is enough.
 
 The country_id accepts the form ID for the country field.  The state_id accepts the form ID for the state field.
 

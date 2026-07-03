@@ -1,0 +1,11 @@
+/log/*
+!/log/.keep
+/storage/*
+!/storage/.keep
+/tmp/*
+!/tmp/.keep
+!/tmp/pids
+/tmp/pids/*
+!/tmp/pids/.keep
+/vendor/javascript/*
+!/vendor/javascript/.keep

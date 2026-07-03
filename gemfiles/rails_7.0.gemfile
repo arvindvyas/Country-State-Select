@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
+
+gem 'rails', '~> 7.0.0'
+# Rails 7.0/7.1's sqlite3 adapter only supports the 1.4.x gem; the gemspec's
+# unpinned `sqlite3` dependency otherwise resolves to the latest 2.x series.
+gem 'sqlite3', '~> 1.4'
+
+gemspec path: '..'

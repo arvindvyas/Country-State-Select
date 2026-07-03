@@ -1,9 +1,17 @@
 # frozen_string_literal: true
 
-require 'rails'
-require 'active_record'
-require 'country_state_select'
+ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('dummy/config/environment', __dir__)
+require 'rspec/rails'
+
+ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  # add configuration here
+  config.use_transactional_fixtures = true
+  config.infer_spec_type_from_file_location!
+  config.filter_rails_from_backtrace!
+
+  config.after do
+    CountryStateSelect.reset_configuration!
+  end
 end

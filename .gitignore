@@ -21,3 +21,5 @@ tmp
 *.a
 mkmf.log
 .idea/
+vendor/bundle/
+gemfiles/*.gemfile.lock

@@ -1,0 +1,40 @@
+{
+  "name": "country_state_select",
+  "version": "4.0.0",
+  "description": "Dependency-free Country/State/City cascading select fields, with an optional Stimulus controller. JS companion to the country_state_select Ruby gem.",
+  "type": "module",
+  "main": "app/javascript/country_state_select/country_state_select.js",
+  "module": "app/javascript/country_state_select/country_state_select.js",
+  "exports": {
+    ".": "./app/javascript/country_state_select/country_state_select.js",
+    "./controller": "./app/javascript/country_state_select/controller.js"
+  },
+  "files": [
+    "app/javascript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arvindvyas/Country-State-Select.git"
+  },
+  "homepage": "https://github.com/arvindvyas/Country-State-Select",
+  "bugs": "https://github.com/arvindvyas/Country-State-Select/issues",
+  "keywords": [
+    "rails",
+    "country",
+    "state",
+    "city",
+    "select",
+    "stimulus",
+    "hotwire"
+  ],
+  "author": "Arvind Vyas",
+  "license": "MIT",
+  "peerDependencies": {
+    "@hotwired/stimulus": ">=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@hotwired/stimulus": {
+      "optional": true
+    }
+  }
+}

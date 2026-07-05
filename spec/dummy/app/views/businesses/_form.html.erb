@@ -1,0 +1,38 @@
+<%= form_with model: business do |f| %>
+  <% if business.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(business.errors.count, "error") %> prohibited this business from being saved:</h2>
+      <ul>
+        <% business.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div data-controller="country-state-select" data-country-state-select-tom-select-value="false">
+    <div>
+      <%= f.label :country %>
+      <%= f.country_select :country, include_blank: true %>
+    </div>
+
+    <div>
+      <%= f.label :state %>
+      <%= f.state_select :state, :country %>
+    </div>
+
+    <div>
+      <%= f.label :city %>
+      <%= f.city_select :city, :state, :country %>
+    </div>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>

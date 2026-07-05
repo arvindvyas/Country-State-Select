@@ -1,0 +1,34 @@
+===============================================================================
+
+CountryStateSelect is installed. An initializer was created at
+config/initializers/country_state_select.rb — uncomment what you need.
+
+Next, pick ONE JavaScript integration:
+
+  Importmap (Rails 7/8 default) — pins are registered automatically, in
+  app/javascript/application.js:
+
+    import "country_state_select"
+    import { Application } from "@hotwired/stimulus"
+    import CountryStateSelectController from "country_state_select/controller"
+    Application.start().register("country-state-select", CountryStateSelectController)
+
+  Sprockets (no jQuery required):
+
+    //= require country_state_select_vanilla
+
+  npm / esbuild / webpack:
+
+    npm install country_state_select @hotwired/stimulus
+
+Then in a view, wrap your fields in a Stimulus controller container:
+
+  <div data-controller="country-state-select">
+    <%= f.country_select :country %>
+    <%= f.state_select :state, :country %>
+  </div>
+
+See https://github.com/arvindvyas/Country-State-Select#readme for the full
+guide, including simple_form usage and the legacy jQuery/Chosen path.
+
+===============================================================================

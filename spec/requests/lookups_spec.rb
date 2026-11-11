@@ -44,6 +44,16 @@ describe 'CountryStateSelect lookup endpoints', type: :request do
       expect(response).to have_http_status(:not_modified)
     end
 
+    it 'does not return 304 for an ETag issued before the data source changed' do
+      get '/find_states', params: { country_id: 'US' }, as: :json
+      etag = response.headers['ETag']
+      allow(CountryStateSelect.configuration.data_source_instance).to receive(:cache_key).and_return('refreshed-data')
+
+      get '/find_states', params: { country_id: 'US' }, headers: { 'If-None-Match' => etag }, as: :json
+
+      expect(response).to have_http_status(:ok)
+    end
+
     it 'applies only/except/priority filtering configured on the data source' do
       CountryStateSelect.configure { |c| c.priority_countries = [] }
 

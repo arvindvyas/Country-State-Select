@@ -22,6 +22,14 @@ module CountryStateSelect
       def cities(_state_code, _country_code)
         raise NotImplementedError
       end
+
+      # Part of the ETag on the JSON lookup endpoints. Change it whenever the
+      # underlying data changes (e.g. a table's max updated_at) so browsers
+      # holding a cached response re-fetch instead of getting a 304.
+      # @return [String]
+      def cache_key
+        self.class.name
+      end
     end
   end
 end

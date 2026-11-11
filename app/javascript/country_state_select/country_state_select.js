@@ -24,10 +24,14 @@ export default function CountryStateSelect(options) {
   var liveRegion = announce ? ensureLiveRegion() : null;
 
   var enhancedInstances = {};
+  var boundCountryEl = null;
+  var statesRequestId = 0;
+  var citiesRequestId = 0;
+  var NON_TRANSFERABLE_ATTRIBUTES = ['type', 'value'];
 
   init();
 
-  return { refresh: init, destroy: destroy };
+  return { refresh: refresh, destroy: destroy };
 
   // ====== ***** INITIALIZATION ***** ===================================== //
 
@@ -37,9 +41,8 @@ export default function CountryStateSelect(options) {
     var countryEl = document.getElementById(countryId);
     if (!countryEl) return;
 
-    countryEl.addEventListener('change', function () {
-      findStates(countryEl.value, { userInitiated: true });
-    });
+    countryEl.addEventListener('change', countryChange);
+    boundCountryEl = countryEl;
 
     if (hasCityField) {
       document.addEventListener('change', delegatedStateChange);
@@ -79,8 +82,24 @@ export default function CountryStateSelect(options) {
     return !!el && el.tagName === 'SELECT' && el.options.length > 1;
   }
 
+  function refresh() {
+    removeListeners();
+    init();
+  }
+
   function destroy() {
+    removeListeners();
+    Object.keys(enhancedInstances).forEach(destroyEnhancement);
+  }
+
+  function removeListeners() {
+    if (boundCountryEl) boundCountryEl.removeEventListener('change', countryChange);
+    boundCountryEl = null;
     document.removeEventListener('change', delegatedStateChange);
+  }
+
+  function countryChange(event) {
+    findStates(event.target.value, { userInitiated: true });
   }
 
   function delegatedStateChange(event) {
@@ -91,8 +110,13 @@ export default function CountryStateSelect(options) {
 
   // ====== ***** DATA LOOKUP ***** ========================================= //
 
+  // Each lookup takes a fresh request id; a response is only applied if no
+  // newer lookup for the same field started while it was in flight, so a
+  // slow reply for a previously selected country/state can't overwrite the
+  // current one.
   function findStates(countryCode, ctx) {
     ctx = ctx || {};
+    var requestId = ++statesRequestId;
     if (ctx.userInitiated) findCities('', '', { silent: true });
 
     if (offlineData && offlineData.states) {
@@ -101,6 +125,7 @@ export default function CountryStateSelect(options) {
     }
 
     fetchJson(statesUrl, { country_id: countryCode }).then(function (data) {
+      if (requestId !== statesRequestId) return;
       buildStatesDropdown(data || [], ctx);
     });
   }
@@ -108,6 +133,12 @@ export default function CountryStateSelect(options) {
   function findCities(stateCode, countryCode, ctx) {
     ctx = ctx || {};
     if (!hasCityField) return;
+    var requestId = ++citiesRequestId;
+
+    if (!stateCode) {
+      buildCitiesDropdown([], ctx);
+      return;
+    }
 
     if (offlineData && offlineData.cities) {
       var key = countryCode + ':' + stateCode;
@@ -116,6 +147,7 @@ export default function CountryStateSelect(options) {
     }
 
     fetchJson(citiesUrl, { country_id: countryCode, state_id: stateCode }).then(function (data) {
+      if (requestId !== citiesRequestId) return;
       buildCitiesDropdown(data || [], ctx);
     });
   }
@@ -142,18 +174,15 @@ export default function CountryStateSelect(options) {
     rebuildField(stateId, data, ctx.preselect, options.state_placeholder);
     if (!ctx.silent) announceUpdate('State options updated');
 
-    var countryHasChanged = ctx.userInitiated;
-    if (hasCityField) {
-      if (countryHasChanged) {
-        findCities('', '', { silent: true });
-      } else if (ctx.preselect !== undefined) {
-        var stateEl = document.getElementById(stateId);
-        var preselectedCity = options.selected_city || (stateEl && stateEl.getAttribute('data-selected-city'));
-        findCities(stateEl ? stateEl.value : '', countryId && document.getElementById(countryId).value, {
-          preselect: preselectedCity,
-          silent: true
-        });
-      }
+    // A user-initiated country change already cleared the city field in
+    // findStates, so only the initial (pre-selected) load cascades here.
+    if (hasCityField && !ctx.userInitiated && ctx.preselect !== undefined) {
+      var stateEl = document.getElementById(stateId);
+      var preselectedCity = options.selected_city || (stateEl && stateEl.getAttribute('data-selected-city'));
+      findCities(stateEl ? stateEl.value : '', countryId && document.getElementById(countryId).value, {
+        preselect: preselectedCity,
+        silent: true
+      });
     }
   }
 
@@ -163,9 +192,12 @@ export default function CountryStateSelect(options) {
   }
 
   // Rebuilds `fieldId` as a <select> (data present) or a plain text <input>
-  // (no data for the parent selection) while preserving its id/name/class —
-  // mutating the existing node in place rather than replaceWith() keeps
-  // external references (Tom Select instances, other listeners) valid.
+  // (no data for the parent selection). The new element replaces the old
+  // one, so every attribute is carried over (id, name, class, required,
+  // aria-*, Stimulus target data attributes, ...) — otherwise validation,
+  // accessibility wiring and Stimulus targets are lost after the first
+  // rebuild. Tom Select instances are torn down first and re-created on
+  // the new node.
   function rebuildField(fieldId, pairs, preselectValue, placeholder) {
     var el = document.getElementById(fieldId);
     if (!el) return;
@@ -174,18 +206,14 @@ export default function CountryStateSelect(options) {
 
     if (!pairs || pairs.length === 0) {
       var input = document.createElement('input');
+      copyAttributes(el, input);
       input.type = 'text';
-      input.id = fieldId;
-      input.name = el.name;
-      input.className = el.className;
       el.replaceWith(input);
       return;
     }
 
     var select = document.createElement('select');
-    select.id = fieldId;
-    select.name = el.name;
-    select.className = el.className;
+    copyAttributes(el, select);
 
     var blank = document.createElement('option');
     blank.textContent = placeholder || '';
@@ -204,6 +232,12 @@ export default function CountryStateSelect(options) {
 
     el.replaceWith(select);
     enhance(fieldId);
+  }
+
+  function copyAttributes(from, to) {
+    Array.prototype.forEach.call(from.attributes, function (attr) {
+      if (NON_TRANSFERABLE_ATTRIBUTES.indexOf(attr.name) === -1) to.setAttribute(attr.name, attr.value);
+    });
   }
 
   function enhance(fieldId) {

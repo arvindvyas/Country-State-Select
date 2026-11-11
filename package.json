@@ -1,6 +1,6 @@
 {
   "name": "country_state_select",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Dependency-free Country/State/City cascading select fields, with an optional Stimulus controller. JS companion to the country_state_select Ruby gem.",
   "type": "module",
   "main": "app/javascript/country_state_select/country_state_select.js",
@@ -36,5 +36,11 @@
     "@hotwired/stimulus": {
       "optional": true
     }
+  },
+  "scripts": {
+    "test": "node --test test/javascript/*.test.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0"
   }
 }

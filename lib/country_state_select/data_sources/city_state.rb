@@ -23,6 +23,10 @@ module CountryStateSelect
 
         CS.cities(state_code.to_sym, country_code.to_s.empty? ? nil : country_code.to_sym) || []
       end
+
+      def cache_key
+        "#{super}/#{Gem.loaded_specs['city-state']&.version}"
+      end
     end
   end
 end

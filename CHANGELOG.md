@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.0.1
+
+### Fixed
+- Rebuilt state/city fields now keep all of the original element's attributes (`required`, `aria-*`, `disabled`, Stimulus `data-*-target`, ...). Previously only `id`, `name` and `class` survived the first country/state change, which dropped validation and accessibility wiring and broke Stimulus reconnects ("Missing target element").
+- A slow `/find_states` or `/find_cities` response for a previous selection can no longer overwrite the dropdown for the current one.
+- `destroy()` now removes the country `change` listener, and `refresh()` no longer stacks a second set of listeners (which caused duplicate lookups per change).
+- Changing the country no longer sends two `/find_cities` requests for an empty state; the city field is cleared client-side.
+- The lookup endpoints' ETag now includes the gem version and the data source's `cache_key`, so browsers re-fetch after an upgrade or a data change instead of receiving a stale `304`. Custom data sources can override `cache_key`.
+
+### Changed
+- CI: Ruby 4.0 and Rails 8.1 added to the matrix, a JavaScript test job (`npm test`, Node test runner + jsdom), least-privilege workflow `permissions`, and Dependabot for Actions/bundler/npm.
+
 ## 4.0.0
 
 Modernization release. See [docs/migration-v4.md](docs/migration-v4.md) for the full upgrade guide — existing 3.x code (Ruby API and the legacy jQuery JS) keeps working unchanged.

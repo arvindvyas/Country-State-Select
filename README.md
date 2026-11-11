@@ -191,6 +191,12 @@ class MyDataSource < CountryStateSelect::DataSources::Base
   def cities(state_code, country_code)
     ['Los Angeles', 'San Francisco'] # plain names
   end
+
+  # Optional: part of the lookup endpoints' ETag. Return something that
+  # changes with your data so browsers don't keep serving a stale 304.
+  def cache_key
+    "my-data-#{Location.maximum(:updated_at).to_i}"
+  end
 end
 
 CountryStateSelect.configure { |c| c.data_source = MyDataSource.new }

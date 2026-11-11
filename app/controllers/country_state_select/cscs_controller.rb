@@ -30,12 +30,16 @@ module CountryStateSelect
     # both at the HTTP layer (Cache-Control) and via conditional GET
     # (ETag/304), avoiding a render entirely on repeat lookups. Disabled by
     # setting `CountryStateSelect.configuration.cache_duration = nil`.
+    # The ETag includes the gem version and the data source's cache_key so
+    # an upgrade or a data change invalidates responses browsers already hold.
     def render_cached(data, cache_key)
-      duration = CountryStateSelect.configuration.cache_duration
+      configuration = CountryStateSelect.configuration
+      duration = configuration.cache_duration
 
       if duration
         expires_in duration, public: true
-        return unless stale?(etag: cache_key)
+        etag = [CountryStateSelect::VERSION, configuration.data_source_instance.cache_key, cache_key]
+        return unless stale?(etag: etag)
       end
 
       respond_to do |format|

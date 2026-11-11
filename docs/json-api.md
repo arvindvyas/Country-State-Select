@@ -16,7 +16,7 @@ GET /find_states?country_id=US
 [["AK", "Alaska"], ["AL", "Alabama"], ["AR", "Arkansas"], ...]
 ```
 
-Honors whatever `only_countries`/`except_countries`/`priority_countries` and custom `data_source` are configured — it does not bypass your configuration the way calling the underlying data gem directly would.
+Resolves through the configured `data_source`, so a custom adapter is used here too. The country settings (`only_countries`, `except_countries`, `priority_countries`) are not applied: they shape the country list, and this endpoint returns the states of whatever country code it is given.
 
 ## `GET /find_cities`
 
@@ -34,7 +34,9 @@ GET /find_cities?state_id=CA&country_id=US
 
 ## Caching
 
-Both endpoints send `Cache-Control` and `ETag` headers based on `CountryStateSelect.configuration.cache_duration` (default: 1 day). A conditional `GET` with a matching `If-None-Match` gets a `304 Not Modified` with no body. Set `cache_duration = nil` to disable both.
+Both endpoints send `Cache-Control: public` and an `ETag` when `CountryStateSelect.configuration.cache_duration` is set (default: 1 day). Set `cache_duration = nil` to send neither.
+
+The `ETag` is built from the gem version, the data source's `cache_key` and the request params. A conditional `GET` whose `If-None-Match` matches gets `304 Not Modified` with no body. Upgrading the gem (or the `city-state` gem, for the default data source) changes the `ETag`, so clients re-fetch. A custom data source whose data changes at runtime should return a changing `cache_key`; see [Custom data sources](../README.md#custom-data-sources).
 
 ## Routes
 
